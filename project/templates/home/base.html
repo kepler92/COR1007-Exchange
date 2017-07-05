@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<style>
+    .navbar {
+        padding-top: 5px !important;
+        padding-bottom: 0 !important;
+        height: 50px;
+    }
+</style>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand">
+            <a href="{% url 'Home:home' %}">
+                COR1007-Exchange
+            </a>
+        </a>
+    </div>
+    <div class="collapse    navbar-collapse navbar-es1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <!--
+                <li> <a data-toggle="modal" href="#login">로그인</a> </li>
+                <li> <a data-toggle="modal" href="#signin">회원가입</a> </li>
+            -->
+            {% if user.is_active %}
+                <li>
+                    <a href="{'''% url 'users:logout' %'''}">
+                        {% firstof user.get_short_name %}님 안녕하세요.
+                    </a>
+                </li>
+                <li>
+                    <a href="{'''% url 'users:logout' %'''}">
+                        <button type="button" class="btn btn-link btn-lg">로그아웃</button>
+                    </a>
+                </li>
+
+            {% else %}
+                <li>
+                    <a href="{'''% url 'users:logout' %'''}">
+                        <button type="button" class="btn btn-link btn-lg">회원가입</button>
+                    </a>
+                </li>
+                <li>
+                    <a href="{'''% url 'users:logout' %'''}">
+                        <button type="button" class="btn btn-link btn-lg">로그인</button>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>
+
+{% block content %} {% endblock %}
+{% block footer %} {% endblock %}
+
+</body>
+</html>
