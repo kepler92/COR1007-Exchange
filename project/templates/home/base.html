@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>{% block title %} {% endblock %}</title>
+    <title>SSE - {% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
         </button>
 
         <a class="navbar-brand">
-            <a href="{% url 'Home:home' %}">
+            <a href=" {% url 'home:home' %} ">
                 COR1007-Exchange
             </a>
         </a>
@@ -40,28 +40,20 @@
                 <li> <a data-toggle="modal" href="#signin">회원가입</a> </li>
             -->
             {% if user.is_active %}
-                <li>
-                    <a href="{'''% url 'users:logout' %'''}">
-                        {% firstof user.get_short_name %}님 안녕하세요.
-                    </a>
-                </li>
-                <li>
-                    <a href="{'''% url 'users:logout' %'''}">
-                        <button type="button" class="btn btn-link btn-lg">로그아웃</button>
-                    </a>
-                </li>
+                <a href="{'''% url 'logout' %'''}">
+                    {% firstof user.username %}님 안녕하세요.
+                </a>
+                <a href="{% url 'logout' %}">
+                    <button type="button" class="btn btn-link btn-lg">로그아웃</button>
+                </a>
 
             {% else %}
-                <li>
-                    <a href="{'''% url 'users:logout' %'''}">
-                        <button type="button" class="btn btn-link btn-lg">회원가입</button>
-                    </a>
-                </li>
-                <li>
-                    <a href="{'''% url 'users:logout' %'''}">
-                        <button type="button" class="btn btn-link btn-lg">로그인</button>
-                    </a>
-                </li>
+                <a href="{'''% url 'users:logout' %'''}">
+                    <button type="button" class="btn btn-link btn-lg">회원가입</button>
+                </a>
+                <a href="{% url 'login' %}">
+                    <button type="button" class="btn btn-link btn-lg">로그인</button>
+                </a>
             {% endif %}
         </ul>
 
